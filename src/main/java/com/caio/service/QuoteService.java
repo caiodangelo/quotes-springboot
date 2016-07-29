@@ -19,7 +19,7 @@ public class QuoteService {
     @Autowired
     QuoteRepository quoteRepository;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Quote> getAllQuotes(){
         return quoteRepository.findAll();
     }
