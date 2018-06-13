@@ -19,27 +19,32 @@ public class QuoteService {
     @Autowired
     QuoteRepository quoteRepository;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @GetMapping
     public List<Quote> getAllQuotes(){
         return quoteRepository.findAll();
     }
 
-    @RequestMapping(value="/random", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
+    public Quote getQuote(@PathVariable String id){
+        return quoteRepository.findOne(id);
+    }
+
+    @GetMapping(value="/random")
     public Quote getRandomQuote(){
         return quoteRepository.findRandom();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public Quote createQuote(@RequestBody Quote quote){
         return quoteRepository.save(quote);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public void removeQuote(@PathVariable String id){
         quoteRepository.delete(id);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @DeleteMapping
     public void clearQuotes(){
         quoteRepository.deleteAll();
     }
